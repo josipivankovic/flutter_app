@@ -50,7 +50,17 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
-flutter:
+flutter: 
+  assets:
+    - assets/images/mini.jpg
+    - assets/images/mini2.jpg
+    - assets/images/mini3.jpg
+    - assets/images/mini4.jpg
+    - assets/images/mini5.jpg
+    - assets/images/mini6.jpg
+
+
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

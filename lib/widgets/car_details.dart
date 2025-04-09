@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 
 class CarDetails extends StatelessWidget {
-  const CarDetails({super.key});
+  final String title;
+  final String description;
+  final String year;
+  final String mileage;
+  final String fuel;
+  final String gearbox;
+  final String power;
+  final String seller;
+  final String phone;
+  final String location;
+
+  const CarDetails({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.year,
+    required this.mileage,
+    required this.fuel,
+    required this.gearbox,
+    required this.power,
+    required this.seller,
+    required this.phone,
+    required this.location,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,28 +35,25 @@ class CarDetails extends StatelessWidget {
           'Opis vozila:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        const Text(
-          'Moderan gradski automobil s električnim pogonom. '
-          'U izvrsnom stanju, redovno održavan. Idealno za svakodnevnu vožnju.',
-        ),
+        Text(description),
         const SizedBox(height: 20),
         const Text(
           'Tehnički podaci:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        const Text('Godina: 2018'),
-        const Text('Kilometraža: 143 000 km'),
-        const Text('Gorivo: Električni'),
-        const Text('Mjenjač: Automatski'),
-        const Text('Snaga motora: 135 kW'),
+        Text('Godina: $year'),
+        Text('Kilometraža: $mileage'),
+        Text('Gorivo: $fuel'),
+        Text('Mjenjač: $gearbox'),
+        Text('Snaga motora: $power'),
         const SizedBox(height: 20),
         const Text(
           'Kontakt informacije:',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        const Text('Ime prodavača: Josip Josipović'),
-        const Text('Telefon: +385 91/123-2233'),
-        const Text('Lokacija: Zagreb'),
+        Text('Ime prodavača: $seller'),
+        Text('Telefon: $phone'),
+        Text('Lokacija: $location'),
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {

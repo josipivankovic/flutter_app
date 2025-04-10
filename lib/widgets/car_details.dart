@@ -31,64 +31,93 @@ class CarDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Opis vozila:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Text(description),
         const SizedBox(height: 20),
-        const Text(
-          'Tehnički podaci:',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Card(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          elevation: 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Opis vozila:', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(description),
+              ],
+            ),
+          ),
         ),
-        Text('Godina: $year'),
-        Text('Kilometraža: $mileage'),
-        Text('Gorivo: $fuel'),
-        Text('Mjenjač: $gearbox'),
-        Text('Snaga motora: $power'),
-        const SizedBox(height: 20),
-        const Text(
-          'Kontakt informacije:',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Card(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          elevation: 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Tehnički podaci:', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Godina: $year'),
+                Text('Kilometraža: $mileage'),
+                Text('Gorivo: $fuel'),
+                Text('Mjenjač: $gearbox'),
+                Text('Snaga motora: $power'),
+              ],
+            ),
+          ),
         ),
-        Text('Ime prodavača: $seller'),
-        Text('Telefon: $phone'),
-        Text('Lokacija: $location'),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Kontaktiraj prodavača'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Vaše ime'),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Vaša poruka'),
-                    ),
-                  ],
+        Card(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          elevation: 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Kontakt informacije:', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Ime prodavača: $seller'),
+                Text('Telefon: $phone'),
+                Text('Lokacija: $location'),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Kontaktiraj prodavača'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Vaše ime'),
+                            ),
+                            TextField(
+                              decoration: InputDecoration(labelText: 'Vaša poruka'),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Otkaži'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              print('Poruka poslana');
+                            },
+                            child: const Text('Pošalji'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: const Text('Kontaktiraj prodavača'),
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Otkaži'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      print('Poruka poslana');
-                    },
-                    child: const Text('Pošalji'),
-                  ),
-                ],
-              ),
-            );
-          },
-          child: const Text('Kontaktiraj prodavača'),
+              ],
+            ),
+          ),
         ),
       ],
     );

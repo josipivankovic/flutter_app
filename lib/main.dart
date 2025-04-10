@@ -6,6 +6,7 @@ import 'screens/home_screen.dart';
 import 'screens/ads_screen.dart';
 import 'screens/add_ad_screen.dart';
 import 'screens/contact_screen.dart';
+import 'screens/fetch_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-
   List<Map<String, String>> _oglasi = [];
 
   Future<void> _ucitajOglase() async {
@@ -94,6 +94,7 @@ class _MainPageState extends State<MainPage> {
       ),
       AddAdScreen(onAddAd: _dodajOglas),
       const ContactScreen(),
+      const FetchScreen(),
     ];
 
     return Scaffold(
@@ -112,6 +113,7 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Oglasi'),
           BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Dodaj oglas'),
           BottomNavigationBarItem(icon: Icon(Icons.contact_mail), label: 'Kontakt'),
+          BottomNavigationBarItem(icon: Icon(Icons.cloud_download), label: 'Fetch'),
         ],
       ),
     );

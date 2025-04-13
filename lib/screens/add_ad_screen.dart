@@ -15,14 +15,19 @@ class _AddAdScreenState extends State<AddAdScreen> {
   final _locationController = TextEditingController();
   final _descriptionController = TextEditingController();
 
+  String? _selectedCategory;
+
+  final List<String> _kategorije = ['Automobili', 'Motocikli', 'Dijelovi', 'Ostalo'];
+
   void _saveAd() {
-    if (_titleController.text.isEmpty || _priceController.text.isEmpty) return;
+    if (_titleController.text.isEmpty || _priceController.text.isEmpty || _selectedCategory == null) return;
 
     final newAd = {
       'title': _titleController.text,
       'price': _priceController.text,
       'location': _locationController.text,
       'description': _descriptionController.text,
+      'category': _selectedCategory!,
     };
 
     widget.onAddAd(newAd);
@@ -32,7 +37,7 @@ class _AddAdScreenState extends State<AddAdScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Oglas spremljen!'),
         content: Text(
-          'Naslov: ${newAd['title']}\nCijena: ${newAd['price']} €\nLokacija: ${newAd['location']}',
+          'Naslov: ${newAd['title']}\nCijena: ${newAd['price']} €\nLokacija: ${newAd['location']}\nKategorija: ${newAd['category']}',
         ),
         actions: [
           TextButton(
@@ -47,6 +52,9 @@ class _AddAdScreenState extends State<AddAdScreen> {
     _priceController.clear();
     _locationController.clear();
     _descriptionController.clear();
+    setState(() {
+      _selectedCategory = null;
+    });
   }
 
   @override
@@ -55,32 +63,50 @@ class _AddAdScreenState extends State<AddAdScreen> {
       appBar: AppBar(title: const Text('Dodaj oglas')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Naslov oglasa'),
-            ),
-            TextField(
-              controller: _priceController,
-              decoration: const InputDecoration(labelText: 'Cijena (€)'),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
-              controller: _locationController,
-              decoration: const InputDecoration(labelText: 'Lokacija'),
-            ),
-            TextField(
-              controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Opis oglasa'),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _saveAd,
-              child: const Text('Spremi oglas'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                decoration: const InputDecoration(labelText: 'Naslov oglasa'),
+              ),
+              TextField(
+                controller: _priceController,
+                decoration: const InputDecoration(labelText: 'Cijena (€)'),
+                keyboardType: TextInputType.number,
+              ),
+              TextField(
+                controller: _locationController,
+                decoration: const InputDecoration(labelText: 'Lokacija'),
+              ),
+              TextField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(labelText: 'Opis oglasa'),
+                maxLines: 3,
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(labelText: 'Kategorija'),
+                value: _selectedCategory,
+                items: _kategorije.map((kategorija) {
+                  return DropdownMenuItem(
+                    value: kategorija,
+                    child: Text(kategorija),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _saveAd,
+                child: const Text('Spremi oglas'),
+              ),
+            ],
+          ),
         ),
       ),
     );
